@@ -1,0 +1,314 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    typeAliases:
+        ComposeDefinition: '''
+            array{
+                version: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                services: ServiceDefinition,
+                volumes: DriverDefinition,
+                networks: DriverDefinition,
+                configs: FileDefinition,
+                secrets: FileDefinition
+            }
+        '''
+        ServiceDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Name>,
+                children: ServiceDefinitionChildren
+            }
+        '''
+        ServiceDefinitionChildren: '''
+            array{
+                build: BuildDefinition,
+                cap_add: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                cap_drop: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                cgroup_parent: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                command: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarOrSequence>,
+                configs: class-string<Aztec\DockerCompose\Entity\Transformer\ContainerFileSequence>,
+                container_name: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                credential_spec: CredentialSpecsDefinition,
+                depends_on: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                deploy: DeployDefinition,
+                devices: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                dns: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                dns_search: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                entrypoint: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarOrSequence>,
+                env_file: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarOrSequence>,
+                environment: class-string<Aztec\DockerCompose\Entity\Transformer\MappingOrScalarSequence>,
+                expose: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                external_links: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                extra_hosts: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                healthcheck: HealthcheckDefinition,
+                image: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                init: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                isolation: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                labels: class-string<Aztec\DockerCompose\Entity\Transformer\MappingOrScalarSequence>,
+                links: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                logging: LoggingDefinition,
+                network_mode: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                networks: ServiceNetworksDefinition,
+                pid: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                ports: class-string<Aztec\DockerCompose\Entity\Transformer\PortSequence>,
+                restart: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                secrets: class-string<Aztec\DockerCompose\Entity\Transformer\ContainerFileSequence>,
+                security_opt: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                stop_grace_period: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                stop_signal: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                sysctls: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                tmpfs: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarOrSequence>,
+                ulimits: UlimitsDefinition,
+                userns_mode: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                volumes: class-string<Aztec\DockerCompose\Entity\Transformer\VolumeSequence>,
+                working_dir: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                user: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                domainname: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                hostname: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                ipc: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                mac_address: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                privileged: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                read_only: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                shm_size: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                stdin_open: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                tty: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        BuildDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: BuildDefinitionChildren
+            }
+        '''
+        BuildDefinitionChildren: '''
+            array{
+                context: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                dockerfile: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                args: class-string<Aztec\DockerCompose\Entity\Transformer\MappingOrScalarSequence>,
+                cache_from: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                labels: class-string<Aztec\DockerCompose\Entity\Transformer\MappingOrScalarSequence>,
+                shm_size: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                target: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        CredentialSpecsDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: CredentialSpecsDefinitionChildren
+            }
+        '''
+        CredentialSpecsDefinitionChildren: '''
+            array{
+                file: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                registry: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        DeployDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: DeployDefinitionChildren
+            }
+        '''
+        DeployDefinitionChildren: '''
+            array{
+                endpoint_mode: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                labels: class-string<Aztec\DockerCompose\Entity\Transformer\Mapping>,
+                mode: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                placement: PlacementDefinition,
+                replicas: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                max_replicas_per_node: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                resources: ResourcesDefinition,
+                restart_policy: RestartPolicyDefinition,
+                rollback_config: DeployConfigDefinition,
+                update_config: DeployConfigDefinition,
+            }
+        '''
+        PlacementDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: PlacementDefinitionChildren
+            }
+        '''
+        PlacementDefinitionChildren: '''
+            array{
+                constraints: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                preferences: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        ResourcesDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: ResourcesDefinitionChildren
+            }
+        '''
+        ResourcesDefinitionChildren: '''
+            array{
+                limits: ResourcesDataDefinition,
+                reservations: ResourcesDataDefinition
+            }
+        '''
+        ResourcesDataDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: ResourcesDataDefinitionChildren
+            }
+        '''
+        ResourcesDataDefinitionChildren: '''
+            array{
+                cpus: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                memory: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        RestartPolicyDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: RestartPolicyDefinitionChildren
+            }
+        '''
+        RestartPolicyDefinitionChildren: '''
+            array{
+                condition: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                delay: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                max_attempts: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                window: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        DeployConfigDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: DeployConfigDefinitionChildren
+            }
+        '''
+        DeployConfigDefinitionChildren: '''
+            array{
+                parallelism: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                delay: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                failure_action: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                monitor: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                max_failure_ratio: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                order: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        HealthcheckDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: HealthcheckDefinitionChildren
+            }
+        '''
+        HealthcheckDefinitionChildren: '''
+            array{
+                test: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarOrSequence>,
+                interval: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                timeout: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                retries: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                start_period: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                disable: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        LoggingDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: LoggingDefinitionChildren
+            }
+        '''
+        LoggingDefinitionChildren: '''
+            array{
+                driver: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                options: LoggingOptionsDefinition
+            }
+        '''
+        LoggingOptionsDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: LoggingOptionsDefinitionChildren
+            }
+        '''
+        LoggingOptionsDefinitionChildren: '''
+            array{
+                syslog-address: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                max-size: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                max-file: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        ServiceNetworksDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\NameOrScalarSequence>,
+                children: ServiceNetworksDefinitionChildren
+            }
+        '''
+        ServiceNetworksDefinitionChildren: '''
+            array{
+                aliases: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                ipv4_address: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                ipv6_address: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        UlimitsDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: UlimitsDefinitionChildren
+            }
+        '''
+        UlimitsDefinitionChildren: '''
+            array{
+                nproc: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                nofile: UlimitsNofileDefinition
+            }
+        '''
+        UlimitsNofileDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: UlimitsNofileDefinitionChildren
+            }
+        '''
+        UlimitsNofileDefinitionChildren: '''
+            array{
+                soft: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                hard: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        DriverDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Name>,
+                children: DriverDefinitionChildren
+            }
+        '''
+        DriverDefinitionChildren: '''
+            array{
+                driver: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                driver_opts: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                attachable: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                ipam: IpamDefinition,
+                internal: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                labels: class-string<Aztec\DockerCompose\Entity\Transformer\ScalarSequence>,
+                external: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                name: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        IpamDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Node>,
+                children: IpamDefinitionChildren
+            }
+        '''
+        IpamDefinitionChildren: '''
+            array{
+                driver: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                config: class-string<Aztec\DockerCompose\Entity\Transformer\IpamConfigSequence>
+            }
+        '''
+        FileDefinition: '''
+            array{
+                definition: class-string<Aztec\DockerCompose\Definition\Transformer\Name>,
+                children: FileDefinitionChildren
+            }
+        '''
+        FileDefinitionChildren: '''
+            array{
+                file: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                external: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>,
+                name: class-string<Aztec\DockerCompose\Entity\Transformer\Scalar>
+            }
+        '''
+        ChildrenList: ServiceDefinitionChildren|BuildDefinitionChildren|CredentialSpecsDefinitionChildren|DeployDefinitionChildren|PlacementDefinitionChildren|ResourcesDefinitionChildren|ResourcesDataDefinitionChildren|RestartPolicyDefinitionChildren|DeployConfigDefinitionChildren|HealthcheckDefinitionChildren|LoggingDefinitionChildren|LoggingOptionsDefinitionChildren|ServiceNetworksDefinitionChildren|UlimitsDefinitionChildren|UlimitsNofileDefinitionChildren|DriverDefinitionChildren|IpamDefinitionChildren|FileDefinitionChildren

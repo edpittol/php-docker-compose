@@ -1,0 +1,45 @@
+{
+    "name": "edpittol/php-docker-compose",
+    "description": "Compose file definition manager for PHP.",
+    "type": "library",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Eduardo Pittol",
+            "email": "edpittol@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { 
+            "Aztec\\DockerCompose\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { 
+            "Aztec\\DockerCompose\\Tests\\": "tests/" 
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "symfony/yaml": "^4.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "^3.5",
+        "spatie/phpunit-watcher": "^1.12",
+        "phpstan/phpstan": "^0.12.18",
+        "phpstan/phpstan-phpunit": "^0.12.6",
+        "object-calisthenics/phpcs-calisthenics-rules": "*",
+        "mikey179/vfsstream": "^1.6",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan-strict-rules": "^0.12.2"
+    },
+    "scripts": {
+        "qa": [
+            "phpcbf",
+            "phpcs -s",
+            "phpstan analyse",
+            "phpunit"
+        ]
+    }
+}
